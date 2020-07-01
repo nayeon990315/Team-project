@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<!--
+	Epilogue by TEMPLATED
+	templated.co @templatedco
+	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+-->
+<html>
+	<head>
+		<title>화목하조의 전화번호부</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+	</head>
+	<body>
+		<!-- Header -->
+			<header id="header" class="alt">
+				<div class="inner">
+					<h1>PHONE BOOK</h1>
+					<h2>Made by 화목하조</h2>
+					<p>A free responsive site template by <a href="https://templated.co">TEMPLATED</a></p>
+				</div>
+            </header>
+            
+            <script>
+            var filename = "c:\address.txt";
+            var fso = new ActiveXObject('Scripting.FileSystemObject');
+            var wsh = new ActiveXObject('WScript.Shell');
+            var path = wsh.ExpandEnvironmentStrings('%USERPROFILE%\\Desktop\\address.txt');
+            var file = fso.CreateTextFile(path);	// 바탕화면에 파일생성
+            file.Write('\r\n');	// 파일 쓰기
+            file.Write(prompt('이름과 전화번호를 입력하세요', ''));
+            file.Close();
+            file = fso.OpenTextFile(path);	// 파일 열기
+            var text = '';
+            while (!file.AtEndOfStream)	// 파일 읽기
+	            text += file.ReadLine() + '\n';
+            alert(text);
+            file.Close();
+            </script>
+            
+            <button onclick="openTextFile()">Open</button>
+            <div id="output">...</div>
+            <script>
+            function openTextFile() {
+                var input = document.createElement("input");
+                input.type = "file";
+                input.accept = "text/plain"; // 확장자가 xxx, yyy 일때, ".xxx, .yyy"
+                input.onchange = function (event) {
+                    processFile(event.target.files[0]);
+                };
+                input.click();
+            }
+            function processFile(file) {
+                var reader = new FileReader();
+                reader.onload = function () {
+                    output.innerText = reader.result;
+                };
+                reader.readAsText(file, /* optional */ "euc-kr");
+            }
+
+</script>
+
+	</body>
+</html>
